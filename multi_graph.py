@@ -26,8 +26,11 @@ parser.add_argument(
     help='units to break graphs'
 )
 parser.add_argument(
-    '-yam', '--y_axis_max', default=None, type=int,
+    '-yaM', '--y_axis_max', default=None, type=int,
     help='y axis max size'
+)
+parser.add_argument(
+    '-yam', '--y_axis_min', default=0, type=int
 )
 parser.add_argument(
     '-yn', '--y_name', default='accuracy(%)', type=str,
@@ -73,14 +76,14 @@ plt.xlabel(args.x_name)  # x軸の名前を決定する
 plt.ylabel(args.y_name)  # y軸の名前を決定する
 
 plt.xlim(0, epoch_length + 1)  # x軸の範囲を指定
-plt.ylim(0, y_axis_max)  # y軸の範囲を指定
+plt.ylim(args.y_axis_min, y_axis_max)  # y軸の範囲を指定
 
 # グラフのメモリの設定
 x_scale = list(range(0, epoch_length + 1, args.delimiter_x))
 x_scale[0] = 1  # 最初は1から始まるようにする
 plt.xticks(x_scale)  # ここでx軸の目盛りの設定が設定される
 # y軸の設定
-y_scale = list(range(0, y_axis_max + 1, args.delimiter_y))
+y_scale = list(range(args.y_axis_min, y_axis_max + 1, args.delimiter_y))
 plt.yticks(y_scale)
 
 plt.show()  # 図の表示

@@ -16,7 +16,8 @@
         "train4",
         "train5"
       ],
-      "--delimiter_y": "10"
+      "--delimiter_y": "10",
+      "--y_axis_min": "40"
     }
   }
 }
