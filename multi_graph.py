@@ -40,13 +40,24 @@ parser.add_argument(
     '-xn', '--x_name', default='epoch', type=str,
     help='name of the x axis of the graph'
 )
+parser.add_argument(
+    '--out_name', default='sample.png', type=str
+)
+parser.add_argument(
+    '--label_location', default='lower left', type=str
+)
+parser.add_argument(
+    '--font_size', default=18, type=int
+)
 args = parser.parse_args()
 
 assert len(args.input_files) == len(args.names)
 csv_list = []
 
+plt.rcParams["font.size"] = args.font_size  # フォントサイズを指定
+
 for i in range(len(args.input_files)):
-    csv_list.append(pd.read_csv(args.input_files[i], sep='\t'))
+    csv_list.append(pd.read_csv(args.input_files[i], sep=r'\s'))
 
 epoch_length = min([len(csv) for csv in csv_list])
 
@@ -69,8 +80,11 @@ else:
     y_axis_max = ((int('{0:02d}'.format(int(max_value))[0]) + 1) * 10)
 
 for i in range(len(value_list)):
-    plt.plot(x, value_list[i], label=args.names[i])
-plt.legend()  # グラフのラベル名を図に表示する
+    if i % 2 == 0:
+        plt.plot(x, value_list[i], label=args.names[i])
+    else:
+        plt.plot(x, value_list[i], label=args.names[i], linestyle='--')
+plt.legend(loc=args.label_location)  # グラフのラベル名を図に表示する
 
 plt.xlabel(args.x_name)  # x軸の名前を決定する
 plt.ylabel(args.y_name)  # y軸の名前を決定する
@@ -86,4 +100,6 @@ plt.xticks(x_scale)  # ここでx軸の目盛りの設定が設定される
 y_scale = list(range(args.y_axis_min, y_axis_max + 1, args.delimiter_y))
 plt.yticks(y_scale)
 
+plt.tight_layout()  # これがないとラベルが出力画像からはみ出る
+plt.savefig(args.out_name, format='png', dpi=300)  # 高解像度化して保存
 plt.show()  # 図の表示

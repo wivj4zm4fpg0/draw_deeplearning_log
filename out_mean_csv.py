@@ -21,7 +21,7 @@ args = parser.parse_args()
 
 csv_list = []
 for input_file in args.input_files:
-    csv_list.append(pd.read_csv(input_file, sep=' '))
+    csv_list.append(pd.read_csv(input_file, sep=r'\s'))
 
 max_list = []
 for csv in csv_list:
