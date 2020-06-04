@@ -7,46 +7,16 @@ import pandas as pd
 
 # コマンドライン引数の処理
 parser = argparse.ArgumentParser()
-parser.add_argument(
-    'input_file_1', default=None, type=str,
-    help='input train file'
-)
-parser.add_argument(
-    'input_file_2', default=None, type=str,
-    help='input validation file'
-)
-parser.add_argument(
-    '-n1', '--name_1', default='train', type=str,
-    help='first graph name'
-)
-parser.add_argument(
-    '-n2', '--name_2', default='validation', type=str,
-    help='second graph name'
-)
-parser.add_argument(
-    '-pn', '--parameter_name', default='acc-top1', type=str,
-    help='a parameter to be compared'
-)
-parser.add_argument(
-    '-dx', '--delimiter_x', default=25, type=int,
-    help='units to break graphs'
-)
-parser.add_argument(
-    '-dy', '--delimiter_y', default=25, type=int,
-    help='units to break graphs'
-)
-parser.add_argument(
-    '-yam', '--y_axis_max', default=None, type=int,
-    help='y axis max size'
-)
-parser.add_argument(
-    '-yn', '--y_name', default='accuracy(%)', type=str,
-    help='name of the y axis of the graph'
-)
-parser.add_argument(
-    '-xn', '--x_name', default='epoch', type=str,
-    help='name of the x axis of the graph'
-)
+parser.add_argument('input_file_1', default=None, type=str, help='input train file')
+parser.add_argument('input_file_2', default=None, type=str, help='input validation file')
+parser.add_argument('-n1', '--name_1', default='train', type=str, help='first graph name')
+parser.add_argument('-n2', '--name_2', default='validation', type=str, help='second graph name')
+parser.add_argument('-pn', '--parameter_name', default='acc-top1', type=str, help='a parameter to be compared')
+parser.add_argument('-dx', '--delimiter_x', default=25, type=int, help='units to break graphs')
+parser.add_argument('-dy', '--delimiter_y', default=25, type=int, help='units to break graphs')
+parser.add_argument('-yam', '--y_axis_max', default=None, type=int, help='y axis max size')
+parser.add_argument('-yn', '--y_name', default='accuracy(%)', type=str, help='name of the y axis of the graph')
+parser.add_argument('-xn', '--x_name', default='epoch', type=str, help='name of the x axis of the graph')
 args = parser.parse_args()
 
 # csvファイルの読み込み
